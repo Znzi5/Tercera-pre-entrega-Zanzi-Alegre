@@ -1,36 +1,24 @@
-<!-- myapp/templates/insertar_datos.html -->
+{% extends 'base.html' %}
 
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Insertar Datos</title>
-</head>
-<body>
+{% block title %}Insertar Datos - Mi Proyecto Django{% endblock %}
 
-<h2>Insertar Datos</h2>
+{% block content %}
+    <h2>Insertar Datos</h2>
+    
+    <form method="post" action="{% url 'insertar_datos' %}">
+        {% csrf_token %}
+        
+        <label for="{{ categoria_form.nombre.id_for_label }}">Nombre de Categoría:</label>
+        {{ categoria_form.nombre }}
+        
+        <label for="{{ producto_form.nombre.id_for_label }}">Nombre de Producto:</label>
+        {{ producto_form.nombre }}
+        
+        <label for="{{ cliente_form.nombre.id_for_label }}">Nombre de Cliente:</label>
+        {{ cliente_form.nombre }}
 
-<!-- Formulario para insertar datos de la categoría -->
-<form method="post" action="{% url 'insertar_datos' %}">
-    {% csrf_token %}
-    {{ categoria_form.as_p }}
-    <button type="submit">Guardar Categoría</button>
-</form>
+        <!-- Otros campos y formularios relacionados -->
 
-<!-- Formulario para insertar datos del producto -->
-<form method="post" action="{% url 'insertar_datos' %}">
-    {% csrf_token %}
-    {{ producto_form.as_p }}
-    <button type="submit">Guardar Producto</button>
-</form>
-
-<!-- Formulario para insertar datos del cliente -->
-<form method="post" action="{% url 'insertar_datos' %}">
-    {% csrf_token %}
-    {{ cliente_form.as_p }}
-    <button type="submit">Guardar Cliente</button>
-</form>
-
-</body>
-</html>
+        <button type="submit">Guardar</button>
+    </form>
+{% endblock %}

@@ -1,34 +1,20 @@
-<!-- myapp/templates/buscar_datos.html -->
+<!-- templates/AppCoder/buscar_datos.html -->
 
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Buscar Datos</title>
-</head>
-<body>
+{% extends 'base.html' %}
 
-<h2>Buscar Datos</h2>
+{% block title %}Buscar Datos - Mi Proyecto Django{% endblock %}
 
-<!-- Formulario de búsqueda -->
-<form method="get" action="{% url 'buscar_datos' %}">
-    <label for="q">Buscar:</label>
-    <input type="text" id="q" name="q" required>
-    <button type="submit">Buscar</button>
-</form>
+{% block content %}
+    <h2>Buscar Datos</h2>
 
-{% if resultados %}
-    <h3>Resultados de la búsqueda:</h3>
-    <ul>
-        {% for item in resultados %}
-            <li>{{ item.nombre }} - {{ item.otro_campo }}</li>
-            <!-- Ajusta los campos según tus modelos -->
-        {% endfor %}
-    </ul>
-{% else %}
-    <p>No se encontraron resultados.</p>
-{% endif %}
+    <form method="post" action="{% url 'buscar_datos' %}">
+        {% csrf_token %}
+        
+        <label for="{{ tu_formulario.criterio_busqueda.id_for_label }}">Criterio de Búsqueda:</label>
+        {{ tu_formulario.criterio_busqueda }}
+        
+        <button type="submit">Buscar</button>
+    </form>
 
-</body>
-</html>
+    <!-- Otro contenido relacionado con la búsqueda -->
+{% endblock %}
